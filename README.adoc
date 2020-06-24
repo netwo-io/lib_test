@@ -1,0 +1,59 @@
+==  Unit-tests for PostgreSQL (PL/pgSQL)
+
+=== Features
+
+- [x] works with managed PostgreSQL (does not require native extensions)
+- [x] lots of matchers
+- [x] nice console outputs
+
+
+=== Usage
+
+First specify a test inside `test` schema like this:
+
+.examples/my_first_test.sql
+[source,plpgsql]
+----
+include::./examples/my_first_test.sql[]
+----
+
+
+Then run all tests with:
+
+.run_all_tests.sql
+[source,plpgsql]
+----
+include::./run_all_tests.sql[]
+----
+
+=== API
+
+=== Matchers
+
+ * `lib_test.assert_true(condition boolean)`
+ * `lib_test.assert_true(message varchar, condition boolean)`
+
+ * `lib_test.assert_false(condition boolean)`
+
+ * `lib_test.assert_equal(left boolean, right boolean, message varchar default '')`
+ * `lib_test.assert_equal(left integer, right integer, message varchar default '')`
+ * `lib_test.assert_equal(left text, right text, message varchar default '')`
+ * `lib_test.assert_equal(left jsonb, right jsonb, message varchar default '')`
+ * `lib_test.assert_equal(left timestamptz, right timestamptz, message varchar default '')`
+ * `lib_test.assert_equal(left uuid, right uuid, message varchar default '')`
+ * `lib_test.assert_not_equal(left text, right text, message varchar default '')`
+
+ * `lib_test.assert_null(val$ anyelement, message$ text default '')`
+ * `lib_test.assert_not_null(val$ anyelement, message$ text default '')`
+
+ * `lib_test.fail(varchar)`
+
+See ./matches.sql[matches]
+
+=== Credits
+
+* https://github.com/adrianandrei-ca/pgunit[pgunit] for the inspiration and base code
+
+=== SQL Conventions
+
+Code is written https://github.com/fgribreau/sql-convention/[following standard SQL-convention].

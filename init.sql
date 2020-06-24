@@ -4,13 +4,9 @@
 set client_min_messages to warning;
 
 begin;
-
-\echo # Loading helper libs
-
 \ir _schema.sql
-
-select * from test.run_all();
-
+\ir _types.sql
+\ir _functions.sql
+\ir matchers.sql
+\ir run_all_tests.sql
 commit;
-
-\echo # ==========================================
