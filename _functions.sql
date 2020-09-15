@@ -73,8 +73,9 @@ begin
                  quote_ident(l_proc.proname)
                      || '(); ' || l_postcondition_cmd || ' end; $body$';
       perform lib_test.autonomous(l_cmd);
-        -- l_row.failed := false;
-        -- l_row.error_message := 'ok';
+      l_row.failed := false;
+      l_row.error_message := 'ok';
+      return next l_row;
     exception
       when others then
           l_row.failed := true;
