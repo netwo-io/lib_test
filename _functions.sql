@@ -73,12 +73,16 @@ begin
                  quote_ident(l_proc.proname)
                      || '(); ' || l_postcondition_cmd || ' end; $body$';
       perform lib_test.autonomous(l_cmd);
-      l_row.success := true;
-      l_row.error_message := 'ok';
+      l_row.status := 'OK';
+      l_row.error_message := '';
       return next l_row;
     exception
+      when sqlstate '09000' then
+        l_row.status := 'FAILED';
+        l_row.error_message := sqlerrm;
+        return next l_row;
       when others then
-          l_row.success := false;
+          l_row.status := 'CRASHED';
           l_row.error_message := sqlerrm;
           return next l_row;
     end;
